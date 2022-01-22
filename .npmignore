@@ -1,0 +1,8 @@
+.*
+/node_modules
+/public
+index.html
+package-lock.json
+vite.config.ts
+tsconfig.json
+yarn.lock
