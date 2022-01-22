@@ -1,5 +1,7 @@
-import ContextMenu from '../components/ContextMenu.vue'
-import { App, createApp } from 'vue'
+import ContextMenu from "../components/ContextMenu.vue";
+import ElementPlusIcon from "../components/ElementPlusIcon.vue";
+import EleIcon from "../utils/icon";
+import { App, createApp } from "vue";
 
 /**
  * @x 菜单X坐标
@@ -16,18 +18,18 @@ import { App, createApp } from 'vue'
  * @menuList 菜单项列表
  */
 export interface ContextMenuOptions {
-  x?: number
-  y?: number
-  width?: number | string
-  height?: number | string
-  itemHeight?: number | string
-  maxHeight?: number | string
-  bgColor?: string
-  hoverBgColor?: string
-  hoverColor?: string
-  customLayoutClass?: string | string[]
-  customItemClass?: string | string[]
-  menuList: ContextMenuItem[]
+  x?: number;
+  y?: number;
+  width?: number | string;
+  height?: number | string;
+  itemHeight?: number | string;
+  maxHeight?: number | string;
+  bgColor?: string;
+  hoverBgColor?: string;
+  hoverColor?: string;
+  customLayoutClass?: string | string[];
+  customItemClass?: string | string[];
+  menuList: ContextMenuItem[];
 }
 
 /**
@@ -37,36 +39,43 @@ export interface ContextMenuOptions {
  * @children 菜单项子菜单项
  */
 export interface ContextMenuItem {
-  text: string | number
-  icon?: string
-  renderKey?: string | number
-  onClick?: (...args: any[]) => any
-  children?: ContextMenuItem[]
+  text: string | number;
+  icon?: string;
+  iconSize?: number;
+  iconColor?: string;
+  renderKey?: string | number;
+  onClick?: (...args: any[]) => any;
+  children?: ContextMenuItem[];
 }
 
-let vm: App | null = null
-let container: HTMLElement | null = null
+let vm: App | null = null;
+let container: HTMLElement | null = null;
 export const createContextMenu = (options: ContextMenuOptions): void => {
-  createContextMenu.destroy()
-  vm = createApp(ContextMenu, { options })
-  container = document.createElement('div')
+  createContextMenu.destroy();
+  vm = createApp(ContextMenu, { options });
+  vm.use(EleIcon);
+  vm.component("v-el-icon", ElementPlusIcon);
+  container = document.createElement("div");
 
-  vm.mount(container)
-  document.body.appendChild(container)
+  vm.mount(container);
+  document.body.appendChild(container);
 
-
-  document.body.addEventListener('click', ($event: MouseEvent) => {
-    vm && vm.unmount()
-    container && document.body.removeChild(container) && (container = null)
-    $event.stopPropagation()
-  })
-
-}
+  document.body.addEventListener("click", ($event: MouseEvent) => {
+    vm && vm.unmount();
+    container && document.body.removeChild(container) && (container = null);
+    $event.stopPropagation();
+  });
+};
 
 createContextMenu.destroy = function () {
-  vm && vm.unmount()
-  container && document.body.removeChild(container) && (container = null)
-}
+  vm && vm.unmount();
+  container && document.body.removeChild(container) && (container = null);
+};
 
-export const createContextItemMenu = (options: ContextMenuOptions): App => createApp(ContextMenu, { options })
+export const createContextItemMenu = (options: ContextMenuOptions): App => {
+  let vm = createApp(ContextMenu, { options });
+  vm.use(EleIcon);
+  vm.component("v-el-icon", ElementPlusIcon);
 
+  return vm;
+};
