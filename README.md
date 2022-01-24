@@ -2,7 +2,7 @@
 
 ### 最新版本说明
 
-> - 支持自定义菜单项左侧图标，目前仅支持 ElementPlus 中图标，如 CopyDocument，菜单项 icon 参数传 copy-document 即可（中划线格式）
+> - 支持自定义菜单项左侧图标，目前支持 ElementPlus、Ant Design Vue 中图标，如 CopyDocument，菜单项 icon 参数传 CopyDocument 即可。其中 Ant Design Vue图标支持官方属性配置，通过菜单项 iconOption 参数传入，具体可参考下方示例代码
 
 ### 效果图
 
@@ -33,12 +33,15 @@ const handleContextMenu = ($event: MouseEvent) => {
     menuList: [
       {
         text: "一级菜单",
-        icon: "add-location",
+        icon: "RedoOutlined",
+        iconOption: {
+          spin: true,
+        },
         onClick: () => {},
         children: [
           {
             text: "二级菜单",
-            icon: "apple",
+            icon: "AlarmClock",
             children: [
               {
                 text: "三级菜单",
@@ -49,12 +52,12 @@ const handleContextMenu = ($event: MouseEvent) => {
       },
       {
         text: "一级菜单",
-        icon: "camera-filled",
+        icon: "Apple",
         onClick: () => {},
       },
       {
         text: "一级菜单",
-        icon: "list",
+        icon: "List",
         onClick: () => {},
       },
     ],
@@ -96,7 +99,8 @@ body {
 |   参数    |      描述      |   类型   |    默认值     | 必填 |
 | :-------: | :------------: | :------: | :-----------: | :--: |
 |   text    |   菜单项文本   |  String  |      无       |  是  |
-|   icon    | 菜单项左侧图标 |  String  | copy-document |  否  |
+|   icon    | 菜单项左侧图标 |  String  | CopyDocument |  否  |
+|   iconOption    | 图标配置项（仅支持Ant Design Vue图标官方属性） |  Object  | null |  否  |
 | renderKey | 菜单项渲染 key |  String  |  随机字符串   |  否  |
 |  onClick  | 菜单项点击事件 | Function |      无       |  否  |
 | children  |  菜单项子菜单  |  String  |    菜单项     |  否  |

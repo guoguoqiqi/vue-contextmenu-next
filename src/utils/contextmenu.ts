@@ -1,6 +1,6 @@
 import ContextMenu from "../components/ContextMenu.vue";
-import ElementPlusIcon from "../components/ElementPlusIcon.vue";
-import EleIcon from "../utils/icon";
+import Icon from "../components/Icon.vue";
+import renderIcon from "../utils/icon";
 import { App, createApp } from "vue";
 
 /**
@@ -41,6 +41,7 @@ export interface ContextMenuOptions {
 export interface ContextMenuItem {
   text: string | number;
   icon?: string;
+  iconOption?: any;
   iconSize?: number;
   iconColor?: string;
   renderKey?: string | number;
@@ -53,8 +54,8 @@ let container: HTMLElement | null = null;
 export const createContextMenu = (options: ContextMenuOptions): void => {
   createContextMenu.destroy();
   vm = createApp(ContextMenu, { options });
-  vm.use(EleIcon);
-  vm.component("v-el-icon", ElementPlusIcon);
+  vm.use(renderIcon);
+  vm.component("v-context-next-icon", Icon);
   container = document.createElement("div");
 
   vm.mount(container);
@@ -74,8 +75,8 @@ createContextMenu.destroy = function () {
 
 export const createContextItemMenu = (options: ContextMenuOptions): App => {
   let vm = createApp(ContextMenu, { options });
-  vm.use(EleIcon);
-  vm.component("v-el-icon", ElementPlusIcon);
+  vm.use(renderIcon);
+  vm.component("v-context-next-icon", Icon);
 
   return vm;
 };
