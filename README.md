@@ -24,7 +24,7 @@ npm i vue-contextmenu-next
   </button>
 </template>
 <script lang="ts" setup>
-import { $contextmenu } from "../index";
+import { $contextmenu } from "vue-contextmenu-next/index";
 
 const handleContextMenu = ($event: MouseEvent) => {
   $contextmenu({
