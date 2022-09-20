@@ -53,7 +53,10 @@ const handleContextMenu = ($event: MouseEvent) => {
       {
         text: "一级菜单",
         icon: "Apple",
-        onClick: () => {},
+        onClick: () => {
+          // 关闭菜单
+          $contextmenu.destroy()
+        },
       },
       {
         text: "一级菜单",
